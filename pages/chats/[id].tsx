@@ -1,233 +1,51 @@
 import type { NextPage } from "next";
 import Layout from "../../components/layout";
+import Message from "../../components/Message";
 
 const ChatDetail: NextPage = () => {
   return (
     <Layout canGoBack={true} title="yejiiha">
       <div className="py-10 pb-16 px-4 space-y-4">
         {/* receive message */}
-        <div className="flex items-start space-x-2">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-gray-900 py-2 px-3.5 bg-slate-100 rounded-2xl">
-            <p>
-              Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk
-            </p>
-          </div>
-        </div>
+        <Message message="Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk" />
+
+        <Message message="I want ￦20,000" reversed={true} />
+
+        {/* receive message */}
+        <Message message="Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk" />
+
+        {/* receive message */}
+        <Message message="Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk" />
 
         {/* send message */}
-        <div className="flex flex-row-reverse items-start space-x-2 space-x-reverse">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-white py-2 px-3.5 bg-purple-500 rounded-2xl">
-            <p>I want ￦20,000</p>
-          </div>
-        </div>
+        <Message message="I want ￦20,000" reversed={true} />
 
         {/* receive message */}
-        <div className="flex items-start space-x-2">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-gray-900 py-2 px-3.5 bg-slate-100 rounded-2xl">
-            <p>
-              Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk
-            </p>
-          </div>
-        </div>
+        <Message message="Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk" />
 
         {/* receive message */}
-        <div className="flex items-start space-x-2">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-gray-900 py-2 px-3.5 bg-slate-100 rounded-2xl">
-            <p>
-              Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk
-            </p>
-          </div>
-        </div>
+        <Message message="Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk" />
 
         {/* send message */}
-        <div className="flex flex-row-reverse items-start space-x-2 space-x-reverse">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-white py-2 px-3.5 bg-purple-500 rounded-2xl">
-            <p>I want ￦20,000</p>
-          </div>
-        </div>
+        <Message message="I want ￦20,000" reversed={true} />
 
         {/* receive message */}
-        <div className="flex items-start space-x-2">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-gray-900 py-2 px-3.5 bg-slate-100 rounded-2xl">
-            <p>
-              Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk
-            </p>
-          </div>
-        </div>
+        <Message message="Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk" />
 
         {/* receive message */}
-        <div className="flex items-start space-x-2">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-gray-900 py-2 px-3.5 bg-slate-100 rounded-2xl">
-            <p>
-              Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk
-            </p>
-          </div>
-        </div>
+        <Message message="Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk" />
 
         {/* send message */}
-        <div className="flex flex-row-reverse items-start space-x-2 space-x-reverse">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-white py-2 px-3.5 bg-purple-500 rounded-2xl">
-            <p>I want ￦20,000</p>
-          </div>
-        </div>
+        <Message message="I want ￦20,000" reversed={true} />
 
         {/* receive message */}
-        <div className="flex items-start space-x-2">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-gray-900 py-2 px-3.5 bg-slate-100 rounded-2xl">
-            <p>
-              Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk
-            </p>
-          </div>
-        </div>
+        <Message message="Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk" />
 
         {/* receive message */}
-        <div className="flex items-start space-x-2">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-gray-900 py-2 px-3.5 bg-slate-100 rounded-2xl">
-            <p>
-              Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk
-            </p>
-          </div>
-        </div>
+        <Message message="Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk" />
 
         {/* send message */}
-        <div className="flex flex-row-reverse items-start space-x-2 space-x-reverse">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-white py-2 px-3.5 bg-purple-500 rounded-2xl">
-            <p>I want ￦20,000</p>
-          </div>
-        </div>
-
-        {/* receive message */}
-        <div className="flex items-start space-x-2">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-gray-900 py-2 px-3.5 bg-slate-100 rounded-2xl">
-            <p>
-              Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk
-            </p>
-          </div>
-        </div>
-
-        {/* receive message */}
-        <div className="flex items-start space-x-2">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-gray-900 py-2 px-3.5 bg-slate-100 rounded-2xl">
-            <p>
-              Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk
-            </p>
-          </div>
-        </div>
-
-        {/* send message */}
-        <div className="flex flex-row-reverse items-start space-x-2 space-x-reverse">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-white py-2 px-3.5 bg-purple-500 rounded-2xl">
-            <p>I want ￦20,000</p>
-          </div>
-        </div>
-
-        {/* receive message */}
-        <div className="flex items-start space-x-2">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-gray-900 py-2 px-3.5 bg-slate-100 rounded-2xl">
-            <p>
-              Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk
-            </p>
-          </div>
-        </div>
-
-        {/* receive message */}
-        <div className="flex items-start space-x-2">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-gray-900 py-2 px-3.5 bg-slate-100 rounded-2xl">
-            <p>
-              Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk
-            </p>
-          </div>
-        </div>
-
-        {/* send message */}
-        <div className="flex flex-row-reverse items-start space-x-2 space-x-reverse">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-white py-2 px-3.5 bg-purple-500 rounded-2xl">
-            <p>I want ￦20,000</p>
-          </div>
-        </div>
-
-        {/* receive message */}
-        <div className="flex items-start space-x-2">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-gray-900 py-2 px-3.5 bg-slate-100 rounded-2xl">
-            <p>
-              Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk
-            </p>
-          </div>
-        </div>
-
-        {/* receive message */}
-        <div className="flex items-start space-x-2">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-gray-900 py-2 px-3.5 bg-slate-100 rounded-2xl">
-            <p>
-              Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk
-            </p>
-          </div>
-        </div>
-
-        {/* send message */}
-        <div className="flex flex-row-reverse items-start space-x-2 space-x-reverse">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-white py-2 px-3.5 bg-purple-500 rounded-2xl">
-            <p>I want ￦20,000</p>
-          </div>
-        </div>
-
-        {/* receive message */}
-        <div className="flex items-start space-x-2">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-gray-900 py-2 px-3.5 bg-slate-100 rounded-2xl">
-            <p>
-              Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk
-            </p>
-          </div>
-        </div>
-
-        {/* receive message */}
-        <div className="flex items-start space-x-2">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-gray-900 py-2 px-3.5 bg-slate-100 rounded-2xl">
-            <p>
-              Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk
-            </p>
-          </div>
-        </div>
-
-        {/* send message */}
-        <div className="flex flex-row-reverse items-start space-x-2 space-x-reverse">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-white py-2 px-3.5 bg-purple-500 rounded-2xl">
-            <p>I want ￦20,000</p>
-          </div>
-        </div>
-
-        {/* receive message */}
-        <div className="flex items-start space-x-2">
-          <div className="w-8 h-8 rounded-full bg-slate-400" />
-          <div className="max-w-[calc(100vw*2/3)] w-fit text-sm text-gray-900 py-2 px-3.5 bg-slate-100 rounded-2xl">
-            <p>
-              Hi how much are you selling them for? fhjkdshkfjhdsjkfhsdkjfhk
-            </p>
-          </div>
-        </div>
+        <Message message="I want ￦20,000" reversed={true} />
 
         {/* input box */}
         <div className="fixed py-2 bg-white  bottom-0 inset-x-0">

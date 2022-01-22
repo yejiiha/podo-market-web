@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Layout from "../../components/layout";
+import TextArea from "../../components/TextArea";
 
 const Create: NextPage = () => {
   return (
@@ -49,17 +50,7 @@ const Create: NextPage = () => {
 
         {/* Description Input */}
         <div>
-          <label
-            htmlFor="description"
-            className="mb-1 block text-sm font-semibold text-gray-700"
-          >
-            Description
-          </label>
-          <textarea
-            id="description"
-            className="mt-1 shadow-sm w-full focus:ring-purple-500 rounded-md border-gray-300 focus:border-purple-500 "
-            rows={4}
-          />
+          <TextArea label="Description" name="description" />
         </div>
 
         {/* Go Live Btn */}
