@@ -6,7 +6,7 @@ import TextArea from "../../components/TextArea";
 const CommunityDetail: NextPage = () => {
   return (
     <Layout canGoBack={true}>
-      <div>
+      <div className="pb-8">
         {/* tag */}
         <span className="inline-flex my-3 ml-4 items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-800">
           동네질문

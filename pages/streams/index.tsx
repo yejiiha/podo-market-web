@@ -1,22 +1,27 @@
 import { NextPage } from "next";
+import Link from "next/link";
 import FloatingButton from "../../components/FloatingButton";
 import Layout from "../../components/layout";
 
 const Live: NextPage = () => {
   return (
     <Layout title="라이브" hasTabBar={true}>
-      <div className="py-10 divide-y-2 space-y-4">
+      <div className="divide-y-2 space-y-4">
         {[1, 1, 1, 1, 1, 1, 1].map((_, i) => (
-          <div className="pt-4  px-4" key={i}>
-            <div className="w-full rounded-md shadow-sm bg-slate-300 aspect-video" />
-            <h3 className="text-gray-700 text-lg mt-2">
-              Let&apos;s try live video 📡!
-            </h3>
-          </div>
+          <Link key={i} href={`/streams/${i}`}>
+            <a>
+              <div className="pt-4  px-4">
+                <div className="w-full rounded-md shadow-sm bg-slate-300 aspect-video" />
+                <h3 className="text-gray-700 text-lg mt-2">
+                  Let&apos;s try live video 📡!
+                </h3>
+              </div>
+            </a>
+          </Link>
         ))}
 
         {/* Upload video btn */}
-        <FloatingButton href={"/streams/upload"}>
+        <FloatingButton href={"/streams/create"}>
           <svg
             className="w-6 h-6"
             fill="none"

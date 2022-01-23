@@ -6,11 +6,11 @@ import Layout from "../../components/layout";
 const Community: NextPage = () => {
   return (
     <Layout title="동네생활" hasTabBar={true}>
-      <div className="px-4 py-16 space-y-8">
+      <div className="px-4 space-y-8">
         {[1, 2, 3, 4, 5, 6].map((_, i) => (
           <Link key={i} href={`/community/${i}`}>
             <a>
-              <div className="flex flex-col items-start cursor-pointer">
+              <div className="flex flex-col items-start cursor-pointer py-2">
                 {/* tag */}
                 <span className="flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-800">
                   동네질문
