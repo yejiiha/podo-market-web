@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Heart } from "../libs/svg";
+import { Heart } from "@libs/client/svg";
 
 interface ItemProps {
   title: string;

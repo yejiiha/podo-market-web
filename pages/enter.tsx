@@ -1,19 +1,39 @@
 import { useState } from "react";
-import Button from "../components/Button";
-import Input from "../components/Input";
-import { Github, Twitter } from "../libs/svg";
-import { cls } from "../libs/utils";
+import { useForm } from "react-hook-form";
+import Button from "@components/Button";
+import Input from "@components/Input";
+import { Github, Twitter } from "@libs/client/svg";
+import useMutation from "@libs/client/useMutation";
+import { cls } from "@libs/client/utils";
+
+interface EnterForm {
+  email?: string;
+  phone?: string;
+}
 
 export default function Enter() {
+  const [enter, { loading, error, data }] = useMutation("/api/users/enter");
+
+  const { register, reset, handleSubmit } = useForm<EnterForm>();
+
+  const [isLoading, setIsLoading] = useState(false);
   const [method, setMethod] = useState<"email" | "phone">("email");
 
   const onEmailClick = () => {
+    reset();
     setMethod("email");
   };
 
   const onPhoneClick = () => {
+    reset();
     setMethod("phone");
   };
+
+  const onValid = (data: EnterForm) => {
+    enter(data);
+  };
+
+  console.log(loading, error, data);
 
   return (
     <div className="mt-16 px-4">
@@ -48,10 +68,19 @@ export default function Enter() {
           </div>
         </div>
 
-        <form className="flex flex-col mt-8">
+        <form className="flex flex-col mt-8" onSubmit={handleSubmit(onValid)}>
           <Input
+            register={
+              method === "email"
+                ? register("email", {
+                    required: true,
+                  })
+                : register("phone", {
+                    required: true,
+                  })
+            }
             label={method === "email" ? "Email address" : "Phone number"}
-            name="input"
+            name={method === "email" ? "email" : "phone"}
             kind={method === "email" ? "text" : "phone"}
             required={true}
           />
@@ -60,7 +89,11 @@ export default function Enter() {
 
           <Button
             text={
-              method === "email" ? "Get login link" : "Get one-time password"
+              isLoading
+                ? "loading..."
+                : method === "email"
+                ? "Get login link"
+                : "Get one-time password"
             }
           />
         </form>
