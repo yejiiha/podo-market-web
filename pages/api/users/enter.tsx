@@ -1,6 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import withHandler, { ResponseType } from "@libs/server/withHandler";
 import client from "@libs/server/client";
+import twilio from "twilio";
+import mail from "@sendgrid/mail";
+
+const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
+
+mail.setApiKey(process.env.SENDGRID_API_KEY!);
 
 async function handler(
   req: NextApiRequest,
@@ -35,6 +41,26 @@ async function handler(
   });
 
   console.log(token);
+
+  if (phone) {
+    const message = await twilioClient.messages.create({
+      messagingServiceSid: process.env.TWILIO_MSID,
+      to: `82${process.env.MY_PHONE}`,
+      body: `Your login Token is ${payload}.`,
+    });
+
+    console.log(message);
+  } else if (email) {
+    const emailMessage = await mail.send({
+      from: "yejiiha.dev@gmail.com",
+      to: email,
+      subject: "Your Podo Market Veirificaction Email 🔒",
+      text: `Your token is ${payload}.`,
+      html: `<strong>Your token is ${payload} 😘.</strong>`,
+    });
+
+    console.log(emailMessage);
+  }
 
   return res.json({
     ok: true,
