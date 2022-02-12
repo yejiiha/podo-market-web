@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "@components/Button";
 import Input from "@components/Input";
 import { Github, Twitter } from "@libs/client/svg";
 import useMutation from "@libs/client/useMutation";
 import { cls } from "@libs/client/utils";
+import { useRouter } from "next/router";
 
 interface EnterForm {
   email?: string;
@@ -20,6 +21,8 @@ interface MutationResult {
 }
 
 export default function Enter() {
+  const router = useRouter();
+
   const [enter, { loading, error, data }] =
     useMutation<MutationResult>("/api/users/enter");
   const [confirmToken, { loading: tokenLoading, data: tokenData }] =
@@ -29,7 +32,6 @@ export default function Enter() {
   const { register: tokenRegister, handleSubmit: tokenHandleSubmit } =
     useForm<TokenForm>();
 
-  const [isLoading, setIsLoading] = useState(false);
   const [method, setMethod] = useState<"email" | "phone">("email");
 
   const onEmailClick = () => {
@@ -55,6 +57,12 @@ export default function Enter() {
 
     confirmToken(data);
   };
+
+  useEffect(() => {
+    if (tokenData?.ok) {
+      router.push("/");
+    }
+  }, [tokenData, router]);
 
   console.log(loading, error, data);
 
@@ -148,7 +156,7 @@ export default function Enter() {
                     ? "Get login link"
                     : "Get one-time password"
                 }
-                loading={tokenLoading}
+                loading={loading}
               />
             </form>
           </>

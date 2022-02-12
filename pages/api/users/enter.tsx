@@ -53,7 +53,7 @@ async function handler(
   } else if (email) {
     const emailMessage = await mail.send({
       from: "yejiiha.dev@gmail.com",
-      to: email,
+      to: "yejiiha.dev@gmail.com",
       subject: "Your Podo Market Veirificaction Email 🔒",
       text: `Your token is ${payload}.`,
       html: `<strong>Your token is ${payload} 😘.</strong>`,
