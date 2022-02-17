@@ -21,4 +21,9 @@ async function handler(
   res.status(200).end();
 }
 
-export default withAPISession(withHandler("GET", handler));
+export default withAPISession(
+  withHandler({
+    method: "GET",
+    handler,
+  })
+);

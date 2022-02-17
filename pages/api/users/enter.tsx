@@ -14,7 +14,7 @@ async function handler(
 ) {
   const { phone, email } = req.body;
 
-  const phoneNumber = +phone;
+  const phoneNumber = phone;
   const payload = Math.floor(100000 + Math.random() * 900000) + ""; // 6자리 랜덤 토큰
 
   const userData = phone ? { phoneNumber } : email ? { email } : null;
@@ -67,4 +67,8 @@ async function handler(
   });
 }
 
-export default withHandler("POST", handler);
+export default withHandler({
+  method: "POST",
+  handler,
+  isPrivate: false,
+});

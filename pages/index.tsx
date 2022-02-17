@@ -4,8 +4,13 @@ import FloatingButton from "@components/FloatingButton";
 import Item from "@components/Item";
 import Layout from "@components/layout";
 import { Comment, Heart } from "@libs/client/svg";
+import useUser from "@libs/client/useUser";
 
 const Home: NextPage = () => {
+  const { user, isLoading } = useUser();
+
+  console.log(user);
+
   return (
     <Layout title="홈" hasTabBar={true}>
       <div className="flex flex-col space-y-5">

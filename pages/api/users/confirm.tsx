@@ -41,4 +41,10 @@ async function handler(
   }
 }
 
-export default withAPISession(withHandler("POST", handler));
+export default withAPISession(
+  withHandler({
+    method: "POST",
+    handler,
+    isPrivate: false,
+  })
+);
