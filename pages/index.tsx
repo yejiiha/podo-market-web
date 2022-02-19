@@ -25,7 +25,7 @@ const Home: NextPage = () => {
           />
         ))}
 
-        <FloatingButton href={"/items/upload"}>
+        <FloatingButton href={"/productss/upload"}>
           <Comment />
         </FloatingButton>
       </div>
