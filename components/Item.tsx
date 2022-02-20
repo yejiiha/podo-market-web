@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { Heart } from "@libs/client/svg";
+import { priceToString } from "@libs/client/utils";
 
 interface ItemProps {
   title: string;
   id: number;
-  price: string;
+  price: number;
   comments: number;
   hearts: number;
 }
@@ -17,14 +18,16 @@ export default function Item({
   id,
 }: ItemProps) {
   return (
-    <Link href={`/productss/${id}`}>
+    <Link href={`/products/${id}`}>
       <a className="flex px-4 pt-5 cursor-pointer justify-between">
         <div className="flex space-x-4">
           <div className="w-20 h-20 bg-gray-400 rounded-md" />
 
           <div className="pt-2 flex flex-col">
             <h3 className="text-sm font-semibold text-gray-900">{title}</h3>
-            <span className="font-semibold mt-1 text-gray-900">{price}</span>
+            <span className="font-semibold mt-1 text-gray-900">
+              {priceToString(price)}
+            </span>
           </div>
         </div>
 
