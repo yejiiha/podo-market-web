@@ -18,7 +18,6 @@ const Home: NextPage = () => {
   const { data } = useSWR<ProductsResponse>("/api/products");
 
   console.log(user);
-  console.log(data);
 
   return (
     <Layout title="홈" hasTabBar={true}>
@@ -29,7 +28,7 @@ const Home: NextPage = () => {
             key={p.id}
             title={p.name}
             price={p.price}
-            hearts={1}
+            hearts={p._count.favorites}
             comments={1}
           />
         ))}
