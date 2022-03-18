@@ -12,23 +12,24 @@ async function handler(
     session: { user },
   } = req;
 
-  const faved = await client.favorite.findFirst({
+  const faved = await client.record.findFirst({
     where: {
       productId: +id.toString(),
       userId: user?.id,
+      kind: "Favorite",
     },
   });
 
   if (faved) {
     // delete
-    await client.favorite.delete({
+    await client.record.delete({
       where: {
         id: faved.id,
       },
     });
   } else {
     // create
-    await client.favorite.create({
+    await client.record.create({
       data: {
         user: {
           connect: {
@@ -40,13 +41,28 @@ async function handler(
             id: +id.toString(),
           },
         },
+        kind: "Favorite",
       },
     });
   }
 
-  res.json({
-    ok: true,
+  const favCount = await client.record.count({
+    where: {
+      productId: +id.toString(),
+      kind: "Favorite",
+    },
   });
+
+  await client.product.update({
+    where: {
+      id: +id.toString(),
+    },
+    data: {
+      favCount,
+    },
+  });
+
+  res.json({ ok: true });
 }
 
 export default withAPISession(
