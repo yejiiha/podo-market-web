@@ -23,7 +23,7 @@ export default function Button({
       )}
       disabled={loading}
     >
-      {text}
+      {loading ? "로딩중..." : text}
     </button>
   );
 }
