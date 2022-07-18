@@ -4,6 +4,7 @@ import FloatingButton from "@components/FloatingButton";
 import Layout from "@components/layout";
 import useSWR from "swr";
 import { Stream } from "@prisma/client";
+import { useEffect, useState } from "react";
 
 interface StreamsResponse {
   ok: boolean;
@@ -11,15 +12,47 @@ interface StreamsResponse {
 }
 
 const Streams: NextPage = () => {
-  const { data } = useSWR<StreamsResponse>(`/api/streams`);
+  const pageLimit = 5;
 
-  console.log(data);
+  const [page, setPage] = useState(1);
+  const [list, setList] = useState<Stream[]>([]);
+
+  const { data } = useSWR<StreamsResponse>(
+    `/api/streams?page=${page}&pageLimit=${pageLimit}`
+  );
+
+  const handleScroll = () => {
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight =
+      document.documentElement.clientHeight +
+      document.documentElement.clientHeight / 2;
+
+    // 페이지 끝에 도달하면 추가 데이터를 받아온다\
+    if (scrollTop + clientHeight >= scrollHeight) {
+      setPage((prev) => prev + 1);
+    }
+  };
+
+  useEffect(() => {
+    // scroll event listener 등록
+    window.addEventListener("scroll", handleScroll);
+
+    // scroll event listener 해제
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  useEffect(() => {
+    if (data) setList((prev) => prev?.concat(data?.streams));
+  }, [data]);
 
   return (
     <Layout title="라이브" hasTabBar={true}>
       <div className="divide-y-2 space-y-4">
-        {data?.streams.map((stream) => (
-          <Link key={stream?.id} href={`/streams/${stream?.id}`}>
+        {list.map((stream, index) => (
+          <Link key={index} href={`/streams/${stream?.id}`}>
             <a>
               <div className="pt-4  px-4">
                 <div className="w-full rounded-md shadow-sm bg-slate-300 aspect-video" />

@@ -4,17 +4,73 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import { Stream } from "@prisma/client";
 import { priceToString } from "@libs/client/utils";
+import Message from "@components/Message";
+import { useForm } from "react-hook-form";
+import useMutation from "@libs/client/useMutation";
+import useUser from "@libs/client/useUser";
+import { useEffect } from "react";
+
+interface StreamMessage {
+  id: number;
+  message: string;
+  user: {
+    avatarUrl?: string;
+    name: string;
+    id: number;
+  };
+}
+
+interface StreamWithMessages extends Stream {
+  streamMessages: StreamMessage[];
+}
 
 interface StreamResponse {
   ok: true;
-  stream: Stream;
+  stream: StreamWithMessages;
+}
+
+interface MessageForm {
+  message: string;
 }
 
 const Stream: NextPage = () => {
+  const { user } = useUser();
   const router = useRouter();
-  const { data } = useSWR<StreamResponse>(
-    router?.query?.id ? `/api/streams/${router?.query?.id}` : null
+  const { register, handleSubmit, reset } = useForm<MessageForm>();
+  const { data, mutate } = useSWR<StreamResponse>(
+    router?.query?.id ? `/api/streams/${router?.query?.id}` : null,
+    {
+      refreshInterval: 1000,
+    }
   );
+  const [sendMessage, { loading, data: sendMessageData }] = useMutation(
+    `/api/streams/${router?.query?.id}/messages`
+  );
+
+  console.log(data?.stream?.streamMessages);
+  console.log(sendMessageData);
+
+  const onValid = (form: MessageForm) => {
+    if (loading) return;
+    reset();
+    mutate(
+      (prev) =>
+        prev &&
+        ({
+          ...prev,
+          stream: {
+            ...prev.stream,
+            streamMessages: [
+              ...prev.stream.streamMessages,
+              { id: Date.now(), message: form?.message, user: { ...user } },
+            ],
+          },
+        } as any),
+      false
+    );
+    sendMessage(form);
+  };
+
   return (
     <Layout canGoBack={true}>
       <div className="py-10 px-4  space-y-4">
@@ -37,97 +93,24 @@ const Stream: NextPage = () => {
           <h2 className="text-2xl font-bold text-gray-900">Live Chat</h2>
 
           <div className="py-10 pb-16 h-[50vh] overflow-y-scroll  px-4 space-y-4">
-            <div className="flex items-start space-x-2">
-              <div className="w-8 h-8 rounded-full bg-slate-400" />
-              <div className="w-1/2 text-sm text-gray-700 p-2 border border-gray-300 rounded-md">
-                <p>Hi how much are you selling them for?</p>
-              </div>
-            </div>
-            <div className="flex flex-row-reverse items-start space-x-2 space-x-reverse">
-              <div className="w-8 h-8 rounded-full bg-slate-400" />
-              <div className="w-1/2 text-sm text-gray-700 p-2 border border-gray-300 rounded-md">
-                <p>I want ￦20,000</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-2">
-              <div className="w-8 h-8 rounded-full bg-slate-400" />
-              <div className="w-1/2 text-sm text-gray-700 p-2 border border-gray-300 rounded-md">
-                <p>Hi how much are you selling them for?</p>
-              </div>
-            </div>
-            <div className="flex flex-row-reverse items-start space-x-2 space-x-reverse">
-              <div className="w-8 h-8 rounded-full bg-slate-400" />
-              <div className="w-1/2 text-sm text-gray-700 p-2 border border-gray-300 rounded-md">
-                <p>I want ￦20,000</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-2">
-              <div className="w-8 h-8 rounded-full bg-slate-400" />
-              <div className="w-1/2 text-sm text-gray-700 p-2 border border-gray-300 rounded-md">
-                <p>Hi how much are you selling them for?</p>
-              </div>
-            </div>
-            <div className="flex flex-row-reverse items-start space-x-2 space-x-reverse">
-              <div className="w-8 h-8 rounded-full bg-slate-400" />
-              <div className="w-1/2 text-sm text-gray-700 p-2 border border-gray-300 rounded-md">
-                <p>I want ￦20,000</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-2">
-              <div className="w-8 h-8 rounded-full bg-slate-400" />
-              <div className="w-1/2 text-sm text-gray-700 p-2 border border-gray-300 rounded-md">
-                <p>Hi how much are you selling them for?</p>
-              </div>
-            </div>
-            <div className="flex flex-row-reverse items-start space-x-2 space-x-reverse">
-              <div className="w-8 h-8 rounded-full bg-slate-400" />
-              <div className="w-1/2 text-sm text-gray-700 p-2 border border-gray-300 rounded-md">
-                <p>I want ￦20,000</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-2">
-              <div className="w-8 h-8 rounded-full bg-slate-400" />
-              <div className="w-1/2 text-sm text-gray-700 p-2 border border-gray-300 rounded-md">
-                <p>Hi how much are you selling them for?</p>
-              </div>
-            </div>
-            <div className="flex flex-row-reverse items-start space-x-2 space-x-reverse">
-              <div className="w-8 h-8 rounded-full bg-slate-400" />
-              <div className="w-1/2 text-sm text-gray-700 p-2 border border-gray-300 rounded-md">
-                <p>I want ￦20,000</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-2">
-              <div className="w-8 h-8 rounded-full bg-slate-400" />
-              <div className="w-1/2 text-sm text-gray-700 p-2 border border-gray-300 rounded-md">
-                <p>Hi how much are you selling them for?</p>
-              </div>
-            </div>
-            <div className="flex flex-row-reverse items-start space-x-2 space-x-reverse">
-              <div className="w-8 h-8 rounded-full bg-slate-400" />
-              <div className="w-1/2 text-sm text-gray-700 p-2 border border-gray-300 rounded-md">
-                <p>I want ￦20,000</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-2">
-              <div className="w-8 h-8 rounded-full bg-slate-400" />
-              <div className="w-1/2 text-sm text-gray-700 p-2 border border-gray-300 rounded-md">
-                <p>Hi how much are you selling them for?</p>
-              </div>
-            </div>
-            <div className="flex flex-row-reverse items-start space-x-2 space-x-reverse">
-              <div className="w-8 h-8 rounded-full bg-slate-400" />
-              <div className="w-1/2 text-sm text-gray-700 p-2 border border-gray-300 rounded-md">
-                <p>I want ￦20,000</p>
-              </div>
-            </div>
+            {data?.stream?.streamMessages?.map((m) => (
+              <Message
+                message={m?.message}
+                key={m?.id}
+                reversed={m?.user?.id === user?.id}
+              />
+            ))}
           </div>
 
           {/* Input Box */}
           <div className="fixed py-2 bg-white  bottom-0 inset-x-0">
-            <div className="flex relative max-w-md items-center  w-full mx-auto">
+            <form
+              className="flex relative max-w-md items-center  w-full mx-auto"
+              onSubmit={handleSubmit(onValid)}
+            >
               <input
                 type="text"
+                {...register("message", { required: true })}
                 className="shadow-sm rounded-full w-full border-gray-300 focus:ring-purple-500 focus:outline-none pr-12 focus:border-purple-500"
               />
               <div className="absolute inset-y-0 flex py-1.5 pr-1.5 right-0">
@@ -135,7 +118,7 @@ const Stream: NextPage = () => {
                   &rarr;
                 </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
