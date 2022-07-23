@@ -8,6 +8,7 @@ import Button from "@components/Button";
 import { useEffect, useState } from "react";
 import { Product } from "@prisma/client";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 interface UploadProductForm {
   name: string;
@@ -70,9 +71,11 @@ const Upload: NextPage = () => {
         {/* input file */}
         <div>
           {photoPreview ? (
-            <img
+            <Image
               src={photoPreview}
               className="w-full text-gray-600 h-46 rounded-md"
+              width={480}
+              height={320}
             />
           ) : (
             <label className="cursor-pointer w-full text-gray-600 hover:text-purple-500 flex items-center justify-center border-2 border-dashed border-gray-300 hover:border-purple-500 py-6 h-48 rounded-md">

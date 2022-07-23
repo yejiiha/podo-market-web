@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import useMutation from "@libs/client/useMutation";
 import Button from "@components/Button";
 import { imageDelivery } from "@libs/client/utils";
+import Image from "next/image";
 
 interface EditProfileForm {
   email?: string;
@@ -107,9 +108,11 @@ const EditProfile: NextPage = () => {
       <form className="py-10 px-4 space-y-4" onSubmit={handleSubmit(onValid)}>
         <div className="flex items-center space-x-3">
           {avatarPreview ? (
-            <img
+            <Image
               src={avatarPreview}
               className="w-14 h-14 rounded-full bg-slate-500"
+              width={56}
+              height={56}
             />
           ) : (
             <div className="w-14 h-14 rounded-full bg-slate-500" />

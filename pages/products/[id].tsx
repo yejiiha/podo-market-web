@@ -9,6 +9,7 @@ import Loader from "@components/Loader";
 import { Product, User } from "@prisma/client";
 import useUser from "@libs/client/useUser";
 import useMutation from "@libs/client/useMutation";
+import Image from "next/image";
 
 interface ProductWithUser extends Product {
   user: User;
@@ -48,15 +49,24 @@ const ItemDetail: NextPage = () => {
         <Layout canGoBack={true}>
           <div className="px-4 py-10">
             <div className="mb-8">
-              <img
-                src={imageDelivery(data.product.image, "product")}
-                className="h-96 bg-slate-300"
-              />
+              {data.product.image ? (
+                <div className="relative pb-80">
+                  <Image
+                    src={imageDelivery(data.product.image, "product")}
+                    className="bg-slate-300 object-cover"
+                    layout="fill"
+                  />
+                </div>
+              ) : (
+                <div className="h-96 bg-slate-300" />
+              )}
 
               {/* User profile */}
               <div className="flex items-center space-x-3 py-3 border-t border-b">
                 {data.product.user.avatarUrl ? (
-                  <img
+                  <Image
+                    width={48}
+                    height={48}
                     src={imageDelivery(data.product.user.avatarUrl, "avatar")}
                     className="w-12 h-12 rounded-full bg-slate-300"
                   />

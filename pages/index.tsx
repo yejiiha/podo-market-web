@@ -29,6 +29,7 @@ const Home: NextPage = () => {
             title={p.name}
             price={p.price}
             hearts={p.favCount}
+            image={p.image}
             comments={1}
           />
         ))}
