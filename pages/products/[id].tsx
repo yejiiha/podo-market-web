@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import Layout from "@components/layout";
 import { useRouter } from "next/router";
 import useSWR, { useSWRConfig } from "swr";
-import { cls, priceToString } from "@libs/client/utils";
+import { cls, imageDelivery, priceToString } from "@libs/client/utils";
 import Button from "@components/Button";
 import Link from "next/link";
 import Loader from "@components/Loader";
@@ -48,11 +48,21 @@ const ItemDetail: NextPage = () => {
         <Layout canGoBack={true}>
           <div className="px-4 py-10">
             <div className="mb-8">
-              <div className="h-96 bg-slate-300" />
+              <img
+                src={imageDelivery(data.product.image, "product")}
+                className="h-96 bg-slate-300"
+              />
 
               {/* User profile */}
               <div className="flex items-center space-x-3 py-3 border-t border-b">
-                <div className="w-12 h-12 rounded-full bg-slate-300" />
+                {data.product.user.avatarUrl ? (
+                  <img
+                    src={imageDelivery(data.product.user.avatarUrl, "avatar")}
+                    className="w-12 h-12 rounded-full bg-slate-300"
+                  />
+                ) : (
+                  <div className="w-12 h-12 rounded-full bg-slate-300" />
+                )}
                 <div>
                   <p className="text-sm font-semibold text-gray-700">
                     {data?.product?.user?.name}

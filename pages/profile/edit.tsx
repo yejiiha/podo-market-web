@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import useMutation from "@libs/client/useMutation";
 import Button from "@components/Button";
+import { imageDelivery } from "@libs/client/utils";
 
 interface EditProfileForm {
   email?: string;
@@ -36,8 +37,7 @@ const EditProfile: NextPage = () => {
 
   const avatar = watch("avatar");
 
-  const onValid = ({ email, phone, name, avatar }: EditProfileForm) => {
-    return;
+  const onValid = async ({ email, phone, name, avatar }: EditProfileForm) => {
     if (loading) return;
 
     if (email === "" && phone === "" && name === "") {
@@ -46,25 +46,47 @@ const EditProfile: NextPage = () => {
       });
     }
 
-    editProfile({
-      email,
-      phone,
-      name,
-    });
+    if (avatar && avatar.length > 0 && user) {
+      // ask for CF URL
+      const cloudFlareRequest = await fetch(`/api/files`);
+      const { uploadURL } = await cloudFlareRequest.json();
+      // upload file to CF URL
+      const form = new FormData();
+      form.append("file", avatar[0], `${user?.id}-avatar`);
+
+      const {
+        result: { id },
+      } = await (
+        await fetch(uploadURL, {
+          method: "POST",
+          body: form,
+        })
+      ).json();
+
+      editProfile({
+        email,
+        phone,
+        name,
+        avatarId: id, // CF URL
+      });
+    } else {
+      editProfile({
+        email,
+        phone,
+        name,
+      });
+    }
   };
 
   useEffect(() => {
-    if (user?.email) {
-      setValue("email", user?.email);
-    }
+    if (user?.email) setValue("email", user?.email);
 
-    if (user?.phoneNumber) {
-      setValue("phone", user?.phoneNumber);
-    }
+    if (user?.phoneNumber) setValue("phone", user?.phoneNumber);
 
-    if (user?.name) {
-      setValue("name", user?.name);
-    }
+    if (user?.name) setValue("name", user?.name);
+
+    if (user?.avatarUrl)
+      setAvatarPreview(imageDelivery(user?.avatarUrl, "avatar"));
   }, [user, setValue]);
 
   useEffect(() => {
